@@ -1,0 +1,110 @@
+const { Router } = require('express')
+
+const router = Router()
+const banco = require('../database/conexao')
+
+router.get('/inventario', (req,res) => {
+    banco.query(
+        'select * from inventario',
+        (erro, resultado) =>{
+            if(erro){
+                console.error(erro)
+                return res.json({
+                    mensagem: 'Erro ao acessar o banco de dados.'
+                })
+                
+            }
+            res.json(resultado)
+        }
+    )
+})
+
+router.post('/inventario', (req,res) => {
+    const {nome, categoria, quantidade, status} = req.body
+    
+    if(!nome || !categoria || (!quantidade && quantidade !== 0) || !status){
+        return res.json({
+            mensagem: 'Preencha todos os campos.'
+        })
+    }
+
+    banco.query(
+        'insert into inventario (nome,categoria,quantidade,status) values (?,?,?,?)',
+        [nome,categoria,quantidade,status],
+        (erro, resultado) => {
+            if(erro){
+                console.error(erro)
+                return res.json({
+                    mensagem: 'Erro ao acessar o banco de dados.'
+                })
+            }
+            res.json({
+                mensagem: 'Item cadastrado com sucesso!',
+                id: resultado.insertId
+            })
+        }
+    )
+})
+
+router.put('/inventario/:id', (req,res)=>{
+    
+    const {id} = req.params
+    const {nome,categoria,quantidade,status} = req.body
+
+    if(!nome || !categoria || (!quantidade && quantidade !== 0) || !status){
+        return res.json({
+            mensagem: 'Preencha todos os campos.'
+        })
+    }
+
+    banco.query(
+        'update inventario set nome=?, categoria =?, quantidade=?, status=? where id=?',
+        [nome, categoria,quantidade, status,id],
+        (erro, resultado) => {
+            if(erro){
+                console.error(erro)
+                return res.json({
+                    mensagem: 'Falha ao editar o inventário.'
+                })
+            }
+
+            if(resultado.affectedRows === 0){
+                return res.json({
+                    mensagem: 'Item não encontrado'
+                })
+            }
+
+            res.json({
+                mensagem: 'Item editado com sucesso.'
+            })
+        }
+    )
+})
+
+router.delete('/inventario/:id', (req,res) =>{
+    const {id} = req.params
+
+    banco.query(
+        'delete from inventario where id = ?',
+        [id],
+        (erro, resultado) =>{
+            if(erro){
+                console.error(erro)
+                return res.json({
+                    mensagem: 'Erro ao deletar o item.'
+                })
+            }
+
+            if(resultado.affectedRows === 0){
+                return res.json({
+                    mensagem:'Item não encontrado.'
+                })
+            }
+
+            res.json({
+                mensagem: 'Item deletado com sucesso.'
+            })
+        }
+    )
+})
+module.exports = router

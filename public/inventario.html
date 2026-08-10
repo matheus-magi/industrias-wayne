@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Item</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Cadastrar Item</h2>
+
+    <form id="formCadastroInventario">
+        <label for="nomeItem">Nome</label>
+        <input type="text" id="nomeItem">
+
+        <label for="categoriaItem">Categoria</label>
+        <select id="categoriaItem">
+            <option value="">Selecione...</option>
+            <option value="Equipamento">Equipamento</option>
+            <option value="Dispositivo de segurança">Dispositivo de segurança</option>
+            <option value="Veículo">Veículo</option>
+        </select>
+
+        <label for="quantidadeItem">Quantidade</label>
+        <input type="number" id="quantidadeItem">
+
+        <label for="statusItem">Status</label>
+        <select id="statusItem">
+            <option value="">Selecione...</option>
+            <option value="Disponível">Disponível</option>
+            <option value="Em manutenção">Em manutenção</option>
+        </select>
+
+        <button type="submit" id="btnCadastrarItem">Cadastrar</button>
+    </form>
+
+    <script src="js/inventario.js"></script>
+    
+</body>
+</html>
