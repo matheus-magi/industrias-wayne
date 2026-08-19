@@ -4,6 +4,14 @@ const router = Router()
 const banco = require('../database/conexao')
 
 router.get('/inventario', (req,res) => {
+
+    if(!req.session.usuario){
+        return res.status(401).json({
+            mensagem:'Usuário não autenticado.'
+        })
+    }
+
+
     banco.query(
         'select * from inventario',
         (erro, resultado) =>{
@@ -20,6 +28,21 @@ router.get('/inventario', (req,res) => {
 })
 
 router.post('/inventario', (req,res) => {
+
+    //verifica se o usuário tá logado e tem a permissão necessária
+
+    if (!req.session.usuario){
+        return res.status(401).json({
+            mensagem: 'Usuário não autenticado.'
+        })
+    }
+
+    if (!['Administrador', 'Gerente'].includes(req.session.usuario.cargo)){
+        return res.status(403).json({
+            mensagem: 'Acesso negado.'
+        })
+    }
+
     const {nome, categoria, quantidade, status} = req.body
     
     if(!nome || !categoria || (!quantidade && quantidade !== 0) || !status){
@@ -47,6 +70,18 @@ router.post('/inventario', (req,res) => {
 })
 
 router.put('/inventario/:id', (req,res)=>{
+
+    if (!req.session.usuario){
+        return res.status(401).json({
+            mensagem: 'Usuário não autenticado.'
+        })
+    }
+
+    if (!['Administrador', 'Gerente'].includes(req.session.usuario.cargo)){
+        return res.status(403).json({
+            mensagem: 'Acesso negado.'
+        })
+    }
     
     const {id} = req.params
     const {nome,categoria,quantidade,status} = req.body
@@ -82,6 +117,19 @@ router.put('/inventario/:id', (req,res)=>{
 })
 
 router.delete('/inventario/:id', (req,res) =>{
+
+    if(!req.session.usuario){
+        return res.status(401).json({
+            mensagem: 'Usuário não autenticado.'
+        })
+    }
+    
+    if(req.session.usuario.cargo !== "Administrador"){
+        return res.status(403).json({
+            mensagem: "Acesso negado."
+        });
+    }
+
     const {id} = req.params
 
     banco.query(

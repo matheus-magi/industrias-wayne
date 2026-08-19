@@ -11,9 +11,16 @@ const btnForm = document.getElementById('btnForm')
 async function carregarInventario(){
     const resposta = await fetch('/inventario')
     const itens = await resposta.json()
+    console.log(itens)
     const tbody = document.getElementById('tbody')
 
     tbody.innerHTML = ""
+
+    const respostaSessao = await fetch('/sessao')
+    const usuario = await respostaSessao.json()
+
+    const isAdministrador = usuario.cargo === 'Administrador'
+    const isGerente = usuario.cargo === 'Gerente'
 
     itens.forEach(item =>{
 
@@ -27,6 +34,15 @@ async function carregarInventario(){
         const tdBtn = document.createElement('td')
         const btnEditar = document.createElement('button')
         const btnExcluir = document.createElement('button')
+
+        if(!isAdministrador && !isGerente){
+            btnEditar.disabled = true
+            btnExcluir.disabled = true
+        }
+
+        if(isGerente){
+            btnExcluir.disabled = true
+        }
 
         //código do botão excluir
 
