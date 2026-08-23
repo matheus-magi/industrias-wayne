@@ -3,9 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Painel de Recursos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <aside class="sidebar">
+        <h1>Indústrias Wayne</h1>
+
+        <nav>
+            <a href="/dashboard.html" class="active">Dashboard</a>
+            <a href="/inventario.html">Inventário</a>
+        </nav>
+
+        <div id="user-info">
+            <p id="nome-usuario"></p>
+            <p id="cargo-usuario"></p>
+        </div>
+    </aside>
+
+    <main class="dashboard">
+
+        <header>
+            <h2>Visão Geral</h2>
+            <p>Acompanhe os recursos das Indústrias Wayne.</p>
+        </header>
+
+        <section class="cards">
+
+            <div class="card">
+                <span>Total de recursos</span>
+                <strong id="total-recursos">0</strong>
+            </div>
+
+            <div class="card">
+                <span>Disponíveis</span>
+                <strong id="recursos-disponiveis">0</strong>
+            </div>
+
+            <div class="card">
+                <span>Em manutenção</span>
+                <strong id="recursos-manutencao">0</strong>
+            </div>
+
+        </section>
+
+        <section class="dashboard-grid">
+
+            <div class="painel">
+
+                <h3>Recursos por categoria</h3>
+                <div id="categorias">
+
+                    <div class="categoria">
+
+                        <div class="categoria-info">
+                            <span>Equipamentos</span>
+                            <strong id="info-equipamento">0</strong>
+                        </div>
+
+                        <div class="barra">
+                        <div class="barra-preenchida" id="barra-equipamento"></div>
+                        </div>
+                    </div>
+
+                    <div class="categoria">
+                        <div class="categoria-info">
+
+                            <span>Dispositivos de segurança</span>
+                            <strong id="info-seguranca">0</strong>
+                        </div>
+                        <div class="barra">
+                            <div class="barra-preenchida" id="barra-seguranca"></div>
+                        </div>
+                    </div>
+
+                    <div class="categoria">
+                        <div class="categoria-info">
+
+                            <span>Veículos</span>
+                            <strong id="info-veiculo">0</strong>
+                        </div>
+
+                        <div class="barra">
+                            <div class="barra-preenchida" id="barra-veiculo"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="painel">
+                <h3>Situação dos recursos</h3>
+                <div id="situacao">
+                    <div class="categoria">
+
+                        <div class="categoria-info">
+                            <span>Disponíveis</span>
+                            <strong id="info-disponivel">0</strong>
+                        </div>
+
+                        <div class="barra">
+                            <div class="barra-preenchida" id="barra-disponivel"></div>
+                        </div>
+                    </div>
+
+                    <div class="categoria">
+
+                        <div class="categoria-info">
+                            <span>Em manutenção</span>
+                            <strong id="info-manutencao">0</strong>
+                        </div>
+
+                        <div class="barra">
+                            <div class="barra-preenchida" id="barra-manutencao"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/geral.js"></script>
+    <script src="js/dashboard.js"></script>
     
 </body>
 </html>

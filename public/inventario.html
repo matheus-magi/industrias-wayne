@@ -4,53 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Item</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inventario.css">
 </head>
 <body>
-    <h2 id="titulo-formulario">Cadastrar Item</h2>
 
-    <form id="formCadastro">
-        <label for="nomeItem">Nome</label>
-        <input type="text" id="nomeItem">
+    <aside class="sidebar">
+        <h1>Indústrias Wayne</h1>
 
-        <label for="categoriaItem">Categoria</label>
-        <select id="categoriaItem">
-            <option value="">Selecione...</option>
-            <option value="Equipamento">Equipamento</option>
-            <option value="Dispositivo de segurança">Dispositivo de segurança</option>
-            <option value="Veículo">Veículo</option>
-        </select>
+        <nav>
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/inventario.html" class="active">Inventário</a>
+        </nav>
 
-        <label for="quantidadeItem">Quantidade</label>
-        <input type="number" id="quantidadeItem">
+        <div id="user-info">
+            <p id="nome-usuario"></p>
+            <p id="cargo-usuario"></p>
+        </div>
+    </aside>
 
-        <label for="statusItem">Status</label>
-        <select id="statusItem">
-            <option value="">Selecione...</option>
-            <option value="Disponível">Disponível</option>
-            <option value="Em manutenção">Em manutenção</option>
-        </select>
+    <main class="inventario">
+        <h2 id="titulo-formulario">Cadastrar Item</h2>
 
-        <button type="submit" id="btnForm">Cadastrar</button>
-    </form>
+        <form id="formCadastro">
+            <label for="nomeItem">Nome</label>
+            <input type="text" id="nomeItem">
 
-    <h2>Tabela de Itens</h2>
+            <label for="categoriaItem">Categoria</label>
+            <select id="categoriaItem">
+                <option value="">Selecione...</option>
+                <option value="Equipamento">Equipamento</option>
+                <option value="Dispositivo de segurança">Dispositivo de segurança</option>
+                <option value="Veículo">Veículo</option>
+            </select>
 
-    <table id="tabelaItens">
-        <thead>
-            <tr>
-                <td>Nome</td>
-                <td>Categoria</td>
-                <td>Quantidade</td>
-                <td>Status</td>
-                <td>Ação</td>
-            </tr>
-        <tbody id="tbody">
+            <label for="quantidadeItem">Quantidade</label>
+            <input type="number" id="quantidadeItem">
 
-        </tbody>
-        </thead>
-    </table>
+            <label for="statusItem">Status</label>
+            <select id="statusItem">
+                <option value="">Selecione...</option>
+                <option value="Disponível">Disponível</option>
+                <option value="Em manutenção">Em manutenção</option>
+            </select>
 
+            <button type="submit" id="btnForm">Cadastrar</button>
+        </form>
+
+        <h2>Tabela de Itens</h2>
+
+        <table id="tabelaItens">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Categoria</td>
+                    <td>Quantidade</td>
+                    <td>Status</td>
+                    <td>Ação</td>
+                </tr>
+            <tbody id="tbody">
+
+            </tbody>
+            </thead>
+        </table>
+
+    </main>
+
+    
+
+    <script src="js/geral.js"></script>
     <script src="js/inventario.js"></script>
     
 </body>

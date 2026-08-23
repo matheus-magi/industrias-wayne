@@ -58,4 +58,14 @@ router.get('/sessao', (req,res) =>{
     res.json(req.session.usuario)
 })
 
+router.get('/usuario-logado', (req,res) =>{
+    if(!req.session.usuario){
+        return res.status(401).json({
+            mensagem: 'Usuário não autenticado.'
+        })
+    }
+
+    return res.json(req.session.usuario)
+})
+
 module.exports = router

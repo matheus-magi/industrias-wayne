@@ -1,5 +1,49 @@
 body{
     display: flex;
-    flex-direction: column;
+    margin: 0;
+    background-color: #111318;
+    color: #f1f1f1;
+    font-family: 'Inter', sans-serif;
 }
 
+.sidebar{
+    width: 220px;
+    min-height: 100vh;
+    background-color: #181a20;
+    color: #f1f1f1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar h1{
+    font-size: 20px;
+    margin: 0;
+}
+
+.sidebar nav{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 30px;
+}
+
+.sidebar a{
+    color: #f1f1f1;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+}
+
+.sidebar a.active{
+    background-color:  #20232b;
+    color: #c9a227;
+}
+
+.sidebar a:hover{
+    background-color: #20232b;
+    color: #c9a227;
+}
+
+main {
+    flex: 1;
+}
