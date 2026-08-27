@@ -11,7 +11,6 @@ const btnForm = document.getElementById('btnForm')
 async function carregarInventario(){
     const resposta = await fetch('/inventario')
     const itens = await resposta.json()
-    console.log(itens)
     const tbody = document.getElementById('tbody')
 
     tbody.innerHTML = ""
@@ -31,9 +30,14 @@ async function carregarInventario(){
         const tdCategoria = document.createElement('td')
         const tdQuantidade = document.createElement('td')
         const tdStatus = document.createElement('td')
+
         const tdBtn = document.createElement('td')
+        tdBtn.classList.add('caixa-btns')
+
         const btnEditar = document.createElement('button')
         const btnExcluir = document.createElement('button')
+        btnEditar.classList.add('btn-editar')
+        btnExcluir.classList.add('btn-excluir')
 
         if(!isAdministrador && !isGerente){
             btnEditar.disabled = true

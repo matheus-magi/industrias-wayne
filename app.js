@@ -16,6 +16,7 @@ app.use(session({
 app.use(require('./routes/inventarioRoutes'))
 app.use(require('./routes/loginRoutes'))
 app.use(require('./routes/usuarioRoutes'))
+app.use(require('./routes/dashboardRoutes'))
 
 app.listen(3000, ()=>{
     console.log(`Servidor rodando em localhost:${port}`)

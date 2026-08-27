@@ -29,53 +29,53 @@
     </aside>
 
     <main class="inventario">
-        <h2 id="titulo-formulario">Cadastrar Item</h2>
+        <section class="painel">
+            <h3 id="titulo-formulario">Cadastrar Item</h3>
 
-        <form id="formCadastro">
-            <label for="nomeItem">Nome</label>
-            <input type="text" id="nomeItem">
+            <form id="formCadastro">
+                <label for="nomeItem">Nome</label>
+                <input type="text" id="nomeItem">
 
-            <label for="categoriaItem">Categoria</label>
-            <select id="categoriaItem">
-                <option value="">Selecione...</option>
-                <option value="Equipamento">Equipamento</option>
-                <option value="Dispositivo de segurança">Dispositivo de segurança</option>
-                <option value="Veículo">Veículo</option>
-            </select>
+                <label for="categoriaItem">Categoria</label>
+                <select id="categoriaItem">
+                    <option value="">Selecione...</option>
+                    <option value="Equipamento">Equipamento</option>
+                    <option value="Dispositivo de segurança">Dispositivo de segurança</option>
+                    <option value="Veículo">Veículo</option>
+                </select>
 
-            <label for="quantidadeItem">Quantidade</label>
-            <input type="number" id="quantidadeItem">
+                <label for="quantidadeItem">Quantidade</label>
+                <input type="number" id="quantidadeItem">
 
-            <label for="statusItem">Status</label>
-            <select id="statusItem">
-                <option value="">Selecione...</option>
-                <option value="Disponível">Disponível</option>
-                <option value="Em manutenção">Em manutenção</option>
-            </select>
+                <label for="statusItem">Status</label>
+                <select id="statusItem">
+                    <option value="">Selecione...</option>
+                    <option value="Disponível">Disponível</option>
+                    <option value="Em manutenção">Em manutenção</option>
+                </select>
 
-            <button type="submit" id="btnForm">Cadastrar</button>
-        </form>
+                <button type="submit" id="btnForm">Cadastrar</button>
+            </form>
+        </section>
 
-        <h2>Tabela de Itens</h2>
+            <section class="painel">
+                <h3>Tabela de Itens</h3>
+                <table id="tabelaItens">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Quantidade</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
 
-        <table id="tabelaItens">
-            <thead>
-                <tr>
-                    <td>Nome</td>
-                    <td>Categoria</td>
-                    <td>Quantidade</td>
-                    <td>Status</td>
-                    <td>Ação</td>
-                </tr>
-            <tbody id="tbody">
-
-            </tbody>
-            </thead>
-        </table>
-
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+        </section>
     </main>
-
-    
 
     <script src="js/geral.js"></script>
     <script src="js/inventario.js"></script>

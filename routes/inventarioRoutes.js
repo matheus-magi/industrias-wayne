@@ -61,10 +61,25 @@ router.post('/inventario', (req,res) => {
                     mensagem: 'Erro ao acessar o banco de dados.'
                 })
             }
-            res.json({
-                mensagem: 'Item cadastrado com sucesso!',
-                id: resultado.insertId
-            })
+
+            banco.query(
+                'insert into historico (usuario_id,acao,item_id,item_nome) values (?,?,?,?)',
+                [req.session.usuario.id, 'Cadastrou', resultado.insertId, nome],
+                (erro) => {
+                    if(erro){
+                        console.error(erro)
+                        return res.json({
+                            mensagem: 'Item cadastrado, mas não foi possível registrar o histórico.'
+                            
+                        })
+                    }
+
+                    res.json({
+                        mensagem: 'Item cadastrado com sucesso!',
+                        id: resultado.insertId
+                    })
+                }   
+            )
         }
     )
 })
@@ -93,25 +108,80 @@ router.put('/inventario/:id', (req,res)=>{
     }
 
     banco.query(
-        'update inventario set nome=?, categoria =?, quantidade=?, status=? where id=?',
-        [nome, categoria,quantidade, status,id],
-        (erro, resultado) => {
+        'select * from inventario where id = ?',
+        [id],
+        (erro,resultado) => {
             if(erro){
                 console.error(erro)
                 return res.json({
-                    mensagem: 'Falha ao editar o inventário.'
+                    mensagem: 'Erro ao buscar o item.'
                 })
             }
 
-            if(resultado.affectedRows === 0){
+            if(resultado.length === 0){
                 return res.json({
-                    mensagem: 'Item não encontrado'
+                    mensagem: 'Item não encontrado.'
                 })
             }
 
-            res.json({
-                mensagem: 'Item editado com sucesso.'
-            })
+            const itemAntigo = resultado[0]
+
+            const alteracoes = []
+
+            if(itemAntigo.nome !== nome){
+                alteracoes.push(`nome de "${itemAntigo.nome}" para "${nome}"`)
+            }
+
+            if(itemAntigo.categoria !== categoria){
+                alteracoes.push(`categoria de "${itemAntigo.categoria}" para "${categoria}"`)
+            }
+
+            if(itemAntigo.quantidade !== Number(quantidade)){
+                alteracoes.push(`quantidade de "${itemAntigo.quantidade}" para "${quantidade}"`)
+            }
+
+            if(itemAntigo.status !== status){
+                alteracoes.push(`status de "${itemAntigo.status}" para "${status}"`)
+            }
+
+            if(alteracoes.length === 0){
+                return res.json({
+                    mensagem: 'Nenhuma alteração foi realizada.'
+                })
+            }
+
+            const acao = `Alterou ${alteracoes.join(' e ')}`
+
+            banco.query(
+                'update inventario set nome=?, categoria =?, quantidade=?, status=? where id=?',
+                [nome, categoria,quantidade, status,id],
+                (erro) => {
+                    if(erro){
+                        console.error(erro)
+                        return res.json({
+                            mensagem: 'Falha ao editar o inventário.'
+                        })
+                    }
+
+                    banco.query(
+                        'insert into historico (usuario_id, acao, item_id, item_nome) values (?,?,?,?)',
+                        [req.session.usuario.id, acao, id, nome],
+                        (erro) => {
+
+                            if(erro){
+                                console.error(erro)
+                                return res.json({
+                                mensagem: 'Item editado, mas não foi possível registrar o histórico.'
+                                })
+                            }
+
+                            res.json({
+                                mensagem: 'Item editado com sucesso.'
+                            })
+                        }
+                    )
+                }
+            )
         }
     )
 })
@@ -133,26 +203,56 @@ router.delete('/inventario/:id', (req,res) =>{
     const {id} = req.params
 
     banco.query(
-        'delete from inventario where id = ?',
+        'select * from inventario where id = ?',
         [id],
-        (erro, resultado) =>{
+        (erro,resultado) => {
             if(erro){
                 console.error(erro)
                 return res.json({
-                    mensagem: 'Erro ao deletar o item.'
+                    mensagem: 'Erro ao buscar o item.'
                 })
             }
 
-            if(resultado.affectedRows === 0){
+            if(resultado.length === 0){
                 return res.json({
-                    mensagem:'Item não encontrado.'
+                    mensagem: 'Item não encontrado.'
                 })
             }
 
-            res.json({
-                mensagem: 'Item deletado com sucesso.'
-            })
+            const item = resultado[0]
+
+            banco.query(
+                'delete from inventario where id = ?',
+                [id],
+                (erro) =>{
+                    if(erro){
+                        console.error(erro)
+                        return res.json({
+                            mensagem: 'Erro ao deletar o item.'
+                        })
+                    }
+
+                    banco.query(
+                        'insert into historico (usuario_id,acao,item_id,item_nome) values (?,?,?,?)',
+                        [req.session.usuario.id, 'Deletou', id, item.nome],
+                        (erro) =>{
+
+                            if(erro){
+                                console.error(erro)
+                                return res.json({
+                                    mensagem: 'O item foi deletado, mas não foi possível registrar no histórico.'
+                                })
+                            }
+
+                            res.json({
+                            mensagem: 'Item deletado com sucesso.'
+                            })
+                        }
+                    )
+                }
+            )
         }
     )
 })
+
 module.exports = router

@@ -24,10 +24,6 @@ router.post('/login', (req,res) => {
                     cargo:usuarioEncontrado.cargo
                 }
 
-                console.log(req.session.usuario)
-                console.log('teste')
-
-
                 console.log('Login realizado com sucesso!')
 
                 return res.json({

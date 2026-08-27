@@ -47,4 +47,40 @@ async function carregarDashboard(){
 
 }
 
+async function carregarHistorico(){
+    const resposta = await fetch('/historico')
+
+    if(!resposta.ok){
+        throw new Error(`Status do erro: ${resposta.status}`)
+    }
+    const dadosHistorico = await resposta.json()
+
+    const historico = document.getElementById('historico')
+
+    dadosHistorico.forEach(item => {
+        const li = document.createElement('li')
+
+        const usuario = document.createElement('strong')
+        usuario.textContent = item.nome_usuario
+
+        const acao = document.createElement('span')
+        acao.textContent = item.acao
+
+        const itemNome = document.createElement('span')
+        itemNome.textContent = item.item_nome
+
+        const data = document.createElement('small')
+        const dataFormatada = new Date(item.data).toLocaleString('pt-BR')
+        data.textContent = dataFormatada
+       
+        li.append(usuario,acao,itemNome,data)
+        historico.appendChild(li)
+    })
+    
+    const momentoAtualizou = document.getElementById('horaAtualização')
+    const horaAtual = new Date().toLocaleString('pt-BR')
+    momentoAtualizou.textContent = `Última atualização: ${horaAtual}`
+}
+
 carregarDashboard()
+carregarHistorico()

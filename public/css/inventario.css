@@ -1,3 +1,98 @@
 .inventario{
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+#formCadastro{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#formCadastro label{
+    color: #9da1aa;
+    font-size: 14px;
+}
+
+#formCadastro input,
+#formCadastro select{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #181a20;
+    color: #f1f1f1;
+    border: 1px solid #30333b;
+    border-radius: 6px;
+
+}
+
+#formCadastro input:focus, 
+#formCadastro select:focus{
+    outline: none;
+    border-color: #c9a227;
+}
+
+#btnForm{
+    align-self: center;
+    padding: 10px 20px;
+    background-color: #c9a227;
+    color: #111318;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#tabelaItens{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#tabelaItens th{
+    background-color: #181a20;
+    color: #c9a227;
+    border-bottom: 1px solid #30333b;
+}
+
+#tabelaItens td{
+    color: #f1f1f1;
+    border-bottom: 1px solid #30333b;
+}
+
+#tabelaItens th,
+#tabelaItens td{
+    text-align: center;
+    padding: 14px;
+}
+
+#tabelaItens tbody tr:hover{
+    background-color: #252832;
+}
+
+.btn-editar,
+.btn-excluir{
+    padding: 7px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-editar{
+    background-color: #c9a227;
+    color: #111318;
+}
+
+.btn-excluir{
+    background-color: #8f3f3f;
+    color: #f1f1f1;
+}
+
+.caixa-btns{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
