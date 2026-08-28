@@ -1,6 +1,7 @@
 const formLogin = document.getElementById('formLogin')
 const username = document.getElementById('username')
 const senha = document.getElementById('senha')
+const mensagemErroLogin = document.getElementById('mensagem-erroLogin')
 
 formLogin.addEventListener("submit", async (event) => {
     event.preventDefault()
@@ -18,6 +19,11 @@ formLogin.addEventListener("submit", async (event) => {
     })
 
     const dados = await resposta.json()
-    console.log(dados)
+
+    if(resposta.ok){
+        window.location.href = '/dashboard.html'
+    } else{
+        mensagemErroLogin.textContent = dados.mensagem
+    }
 })
 

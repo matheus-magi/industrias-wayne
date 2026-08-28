@@ -1,6 +1,17 @@
 async function carregarDashboard(){
 
     const resposta = await fetch('/inventario')
+
+    if(resposta.status === 401){
+        window.location.href = '/index.html'
+        return
+    }
+
+    if(!resposta.ok){
+        console.error(`Erro ao carregar dashboard: ${resposta.status}`)
+        return
+    }
+
     const inventario = await resposta.json()
 
     const totalRecursos = inventario.length

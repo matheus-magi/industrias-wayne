@@ -46,7 +46,7 @@ router.post('/inventario', (req,res) => {
     const {nome, categoria, quantidade, status} = req.body
     
     if(!nome || !categoria || (!quantidade && quantidade !== 0) || !status){
-        return res.json({
+        return res.status(400).json({
             mensagem: 'Preencha todos os campos.'
         })
     }
@@ -102,7 +102,7 @@ router.put('/inventario/:id', (req,res)=>{
     const {nome,categoria,quantidade,status} = req.body
 
     if(!nome || !categoria || (!quantidade && quantidade !== 0) || !status){
-        return res.json({
+        return res.status(400).json({
             mensagem: 'Preencha todos os campos.'
         })
     }
@@ -113,13 +113,13 @@ router.put('/inventario/:id', (req,res)=>{
         (erro,resultado) => {
             if(erro){
                 console.error(erro)
-                return res.json({
+                return res.status(500).json({
                     mensagem: 'Erro ao buscar o item.'
                 })
             }
 
             if(resultado.length === 0){
-                return res.json({
+                return res.status(404).json({
                     mensagem: 'Item não encontrado.'
                 })
             }
@@ -145,7 +145,7 @@ router.put('/inventario/:id', (req,res)=>{
             }
 
             if(alteracoes.length === 0){
-                return res.json({
+                return res.status(200).json({
                     mensagem: 'Nenhuma alteração foi realizada.'
                 })
             }
@@ -158,7 +158,7 @@ router.put('/inventario/:id', (req,res)=>{
                 (erro) => {
                     if(erro){
                         console.error(erro)
-                        return res.json({
+                        return res.status(500).json({
                             mensagem: 'Falha ao editar o inventário.'
                         })
                     }
@@ -170,7 +170,7 @@ router.put('/inventario/:id', (req,res)=>{
 
                             if(erro){
                                 console.error(erro)
-                                return res.json({
+                                return res.status(200).json({
                                 mensagem: 'Item editado, mas não foi possível registrar o histórico.'
                                 })
                             }

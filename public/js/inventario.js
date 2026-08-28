@@ -3,6 +3,7 @@ const nomeItem = document.getElementById("nomeItem")
 const categoriaItem = document.getElementById("categoriaItem")
 const quantidadeItem = document.getElementById("quantidadeItem")
 const statusItem = document.getElementById("statusItem")
+const mensagemCadastro = document.getElementById('mensagem-cadastro')
 
 let itemEditando = null;
 const tituloForm = document.getElementById('titulo-formulario')
@@ -10,6 +11,16 @@ const btnForm = document.getElementById('btnForm')
 
 async function carregarInventario(){
     const resposta = await fetch('/inventario')
+
+    if(resposta.status === 401) {
+        window.location.href = '/index.html'
+        return
+    }
+
+    if(!resposta.ok) {
+        console.error(`Erro ao carregar inventário: ${resposta.status}`)
+        return
+    }
     const itens = await resposta.json()
     const tbody = document.getElementById('tbody')
 
@@ -64,7 +75,7 @@ async function carregarInventario(){
 
             const dados = await resposta.json()
 
-            alert(dados.mensagem)
+            console.log(dados)
 
             carregarInventario()
         })
@@ -72,6 +83,10 @@ async function carregarInventario(){
         //código do botão editar
 
         btnEditar.addEventListener('click', () =>{
+
+        mensagemCadastro.textContent = ''
+        mensagemCadastro.classList.remove('erro', 'sucesso')
+
             itemEditando = item.id
 
             nomeItem.value = item.nome
@@ -81,6 +96,11 @@ async function carregarInventario(){
 
             tituloForm.textContent = 'Editar Item' 
             btnForm.textContent = 'Salvar Alterações'
+
+            window.scrollTo({
+                top:0,
+                behavior: 'smooth'
+            })
         })
 
         tdNome.innerText = item.nome
@@ -116,13 +136,24 @@ formCadastro.addEventListener("submit", async(event) => {
         })
 
         const dados = await resposta.json()
-        alert(dados.mensagem)
 
-        itemEditando = null
-        formCadastro.reset()
-        tituloForm.innerText = 'Cadastrar Item' 
-        btnForm.textContent = 'Cadastrar'
-        carregarInventario()
+        mensagemCadastro.classList.remove('erro','sucesso')
+
+        if(resposta.ok){
+            mensagemCadastro.classList.add('sucesso')
+            mensagemCadastro.textContent = dados.mensagem
+
+            itemEditando = null
+            formCadastro.reset()
+            tituloForm.innerText = 'Cadastrar Item' 
+            btnForm.textContent = 'Cadastrar'
+            carregarInventario()
+
+        }else{
+            mensagemCadastro.classList.add('erro')
+            mensagemCadastro.textContent = dados.mensagem
+        }
+
         return
     }
 
@@ -140,9 +171,19 @@ formCadastro.addEventListener("submit", async(event) => {
     })
 
     const dados = await resposta.json()
-    alert(dados.mensagem)
-    formCadastro.reset()
-    carregarInventario()
+
+    mensagemCadastro.classList.remove('erro', 'sucesso')
+
+    if(resposta.ok){
+        mensagemCadastro.classList.add('sucesso')
+        mensagemCadastro.textContent = dados.mensagem
+        formCadastro.reset()
+        carregarInventario()
+
+    }else{
+        mensagemCadastro.classList.add('erro')
+        mensagemCadastro.textContent = dados.mensagem
+    }
 })
 
 carregarInventario()

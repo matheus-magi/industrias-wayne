@@ -9,19 +9,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <h1>Indústrias Wayne</h1>
+    
+    <section class="painel">
+        <h1 >Indústrias Wayne</h1>
 
-    <h3>Faça seu login:</h3>
-    <form id="formLogin">
-        <label for="username">Username</label>
-        <input type="text" id="username">
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha">
-        <button type="submit" id="entrar">Entrar</button>
-    </form>
+        <p class="subtitulo">Faça seu login:</hp>
+
+        <form id="formLogin">
+            <label for="username">Username</label>
+            <input type="text" id="username">
+
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha">
+
+            <button type="submit" id="entrar">Entrar</button>
+            <p id="mensagem-erroLogin"></p>
+        </form>
+    </section>
     
     <script src="js/login.js"></script>
     

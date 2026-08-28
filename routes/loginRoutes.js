@@ -64,4 +64,19 @@ router.get('/usuario-logado', (req,res) =>{
     return res.json(req.session.usuario)
 })
 
+router.post('/logout', (req,res) =>{
+    req.session.destroy((erro) =>{
+        if(erro){
+            console.error(erro)
+            return res.status(500).json({
+                mensagem: 'Erro ao sair da conta.'
+            })
+        }
+
+        res.json({
+            mensagem: 'Logout realizado com sucesso.'
+        })
+    })
+})
+
 module.exports = router

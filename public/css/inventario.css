@@ -96,3 +96,21 @@
     justify-content: center;
     gap: 8px;
 }
+
+#mensagem-cadastro{
+    text-align: center;
+
+}
+
+.erro{
+    color: #d66 ;
+}
+
+.sucesso{
+    color: #c9a227 ;
+}
+
+.btn-excluir:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
