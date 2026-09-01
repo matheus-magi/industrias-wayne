@@ -3,6 +3,18 @@ const { Router } = require('express')
 const router = Router()
 const banco = require('../database/conexao')
 
+const categoriasValidas = [
+    'Equipamento',
+    'Dispositivo de segurança',
+    'Veículo'
+]
+
+const statusValidos = [
+    'Disponível',
+    'Em manutenção',
+    'Esgotado'
+]
+
 router.get('/inventario', (req,res) => {
 
     if(!req.session.usuario){
@@ -45,9 +57,20 @@ router.post('/inventario', (req,res) => {
 
     const {nome, categoria, quantidade, status} = req.body
     
-    if(!nome || !categoria || (!quantidade && quantidade !== 0) || !status){
+    if(
+        !nome || 
+        !categoria || 
+        (!quantidade && quantidade !== 0) || 
+        !status ||
+        !Number.isInteger(Number(quantidade)) ||
+        Number(quantidade) < 0 ||
+        !categoriasValidas.includes(categoria) ||
+        !statusValidos.includes(status) ||
+        (Number(quantidade) > 0 && status === 'Esgotado') ||
+        (Number(quantidade) === 0 && status !== 'Esgotado')
+    ){
         return res.status(400).json({
-            mensagem: 'Preencha todos os campos.'
+            mensagem: 'Preencha todos os campos corretamente.'
         })
     }
 
@@ -101,9 +124,20 @@ router.put('/inventario/:id', (req,res)=>{
     const {id} = req.params
     const {nome,categoria,quantidade,status} = req.body
 
-    if(!nome || !categoria || (!quantidade && quantidade !== 0) || !status){
+    if(
+        !nome || 
+        !categoria || 
+        (!quantidade && quantidade !== 0) || 
+        !status ||
+        !Number.isInteger(Number(quantidade)) ||
+        Number(quantidade) < 0 ||
+        !categoriasValidas.includes(categoria) ||
+        !statusValidos.includes(status) ||
+        (Number(quantidade) > 0 && status === 'Esgotado') ||
+        (Number(quantidade) === 0 && status !== 'Esgotado')
+    ){
         return res.status(400).json({
-            mensagem: 'Preencha todos os campos.'
+            mensagem: 'Preencha todos os campos corretamente.'
         })
     }
 

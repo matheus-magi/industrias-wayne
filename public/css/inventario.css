@@ -110,7 +110,21 @@
     color: #c9a227 ;
 }
 
-.btn-excluir:disabled {
+#tabelaItens td.status-disponivel{
+    color: #6fcf97;
+}
+
+#tabelaItens td.status-manutencao{
+    color:  #c9a227;
+}
+
+#tabelaItens td.status-esgotado{
+    color: #d66;
+}
+
+.btn-excluir:disabled,
+.btn-editar:disabled,
+#btnForm:disabled {
     opacity: 0.4;
     cursor: not-allowed;
 }

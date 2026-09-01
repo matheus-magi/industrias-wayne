@@ -3,6 +3,16 @@ body{
     min-height: 100vh;
     justify-content: center;
     align-items: center;
+    
+}
+
+.logo-fundo{
+    position: absolute;
+    opacity: 0.15;
+    width: 80%;
+    z-index: 0;
+    pointer-events: none;
+    
 }
 
 .painel{
@@ -10,6 +20,8 @@ body{
     width: 350px;
     padding: 35px;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
 
 .painel h1{

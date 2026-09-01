@@ -9,6 +9,28 @@ let itemEditando = null;
 const tituloForm = document.getElementById('titulo-formulario')
 const btnForm = document.getElementById('btnForm')
 
+const statusDisponivel = statusItem.querySelector('option[value="Disponível"]')
+const statusManutencao = statusItem.querySelector('option[value="Em manutenção"]')
+const statusEsgotado = statusItem.querySelector('option[value="Esgotado"]')
+
+quantidadeItem.addEventListener('input', ()=>{
+    if(Number(quantidadeItem.value) === 0){
+        statusItem.value = 'Esgotado'
+        statusDisponivel.disabled = true
+        statusManutencao.disabled = true
+        statusEsgotado.disabled = false
+    } else{
+        statusDisponivel.disabled = false
+        statusManutencao.disabled = false
+        statusEsgotado.disabled = true
+
+        if(statusItem.value === 'Esgotado'){
+            statusItem.value = ''
+        }
+    }
+})
+
+
 async function carregarInventario(){
     const resposta = await fetch('/inventario')
 
@@ -28,6 +50,10 @@ async function carregarInventario(){
 
     const respostaSessao = await fetch('/sessao')
     const usuario = await respostaSessao.json()
+
+    if(usuario.cargo === 'Funcionário'){
+        btnForm.disabled = true
+    }
 
     const isAdministrador = usuario.cargo === 'Administrador'
     const isGerente = usuario.cargo === 'Gerente'
@@ -107,6 +133,14 @@ async function carregarInventario(){
         tdCategoria.innerText = item.categoria
         tdQuantidade.innerText = item.quantidade
         tdStatus.innerText = item.status
+
+        if(item.status === 'Disponível'){
+            tdStatus.classList.add('status-disponivel')
+        } else if(item.status === 'Em manutenção'){
+            tdStatus.classList.add('status-manutencao')
+        } else if(item.status === 'Esgotado'){
+            tdStatus.classList.add('status-esgotado')
+        }
 
         btnEditar.innerText = 'Editar'
         btnExcluir.innerText = 'Excluir'
