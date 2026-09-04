@@ -22,12 +22,16 @@ body{
 
 .sidebar nav{
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 8px;
     margin-top: 30px;
 }
 
 .sidebar a{
+    width: 180px;
+    box-sizing: border-box;
+    text-align: center;
     color: #f1f1f1;
     text-decoration: none;
     padding: 12px 15px;
@@ -42,6 +46,21 @@ body{
 .sidebar a:hover{
     background-color: #20232b;
     color: #c9a227;
+}
+
+.logo-sidebar{
+    width: 120px;
+    display: block;
+    margin: 20px auto 0;
+    opacity: 0.5;
+}
+
+#btn-menu{
+    display: none;
+}
+
+#user-info{
+    text-align: center;
 }
 
 #btn-logout{
@@ -62,10 +81,12 @@ body{
 }
 main {
     flex: 1;
+    min-width: 0;
 }
 
 .painel{
     flex: 1;
+    min-width: 0;
     padding: 20px;
     border: 1px solid #30333b;
     border-radius: 10px;
@@ -77,3 +98,74 @@ main {
     padding-left: 10px;
 }
 
+@media (max-width: 1024px){
+
+    body{
+        flex-direction: column;
+    }
+
+    .topo-sidebar{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+    }
+
+    .sidebar{
+        width: 100%;
+        min-height: 0;
+        height: auto;
+
+        padding: 12px 20px;
+        box-sizing: border-box;
+    }
+
+    .logo-sidebar{
+        display: none;
+    }
+
+    #btn-menu{
+        display: block;
+    }
+
+    .menu-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-15px);
+
+        transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-mobile.aberto {
+
+        max-height: 500px;
+        opacity: 1;
+        transform: translateY(0);
+
+        margin-top: 15px;
+        border-top: 1px solid #30333b;
+        padding-top: 15px;
+    }
+
+    .menu-mobile.aberto nav{
+        width: 100%;
+        margin-top: 0;
+        gap: 5px;
+    }
+
+    .menu-mobile.aberto #user-info{
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .menu-mobile.aberto #btn-logout{
+        width: 180px;
+        margin-top: 15px;
+    }
+}

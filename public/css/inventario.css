@@ -45,6 +45,10 @@
     margin-top: 10px;
 }
 
+.tabela-container{
+    overflow-x: auto;
+}
+
 #tabelaItens{
     width: 100%;
     border-collapse: collapse;
@@ -70,6 +74,10 @@
 
 #tabelaItens tbody tr:hover{
     background-color: #252832;
+}
+
+.titulo-curto{
+    display: none;
 }
 
 .btn-editar,
@@ -110,6 +118,10 @@
     color: #c9a227 ;
 }
 
+.aviso-tabela{
+    display: none;
+}
+
 #tabelaItens td.status-disponivel{
     color: #6fcf97;
 }
@@ -128,3 +140,43 @@
     opacity: 0.4;
     cursor: not-allowed;
 }
+
+@media (max-width: 768px){
+
+    #tabelaItens th,
+    #tabelaItens td {
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    .btn-editar,
+    .btn-excluir{
+        padding:  6px 8px;
+        font-size: 12px;
+    }
+
+    .caixa-btns{
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .titulo-completo{
+        display: none;
+    }
+
+    .titulo-curto{
+        display: inline;
+    }
+}
+
+@media (max-width: 500px){
+    .aviso-tabela{
+        display: block;
+        text-align: center;
+        color: #9da1aa;
+        font-size: 13px;
+        margin: 0 0 8px;
+    }
+}
+

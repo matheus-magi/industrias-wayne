@@ -69,6 +69,19 @@
     width: 0;
 }
 
+.barra-disponivel{
+    background-color: #6fcf97;
+
+}
+
+.barra-manutencao{
+    background-color: #c9a227;
+}
+
+.barra-esgotado{
+    background-color: #d66;
+}
+
 #historico{
     max-height: 300px;
     overflow-y: auto;
@@ -114,6 +127,15 @@
     margin-top: 5px;
 }
 
+@media (max-width:768px){
+    .cards{
+        flex-direction: column;
+    }
+
+    .dashboard-grid{
+        flex-direction: column;
+    }
+}
 
 
 

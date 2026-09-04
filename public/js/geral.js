@@ -1,4 +1,17 @@
 const btnLogout = document.getElementById('btn-logout')
+const btnMenu = document.getElementById('btn-menu')
+const menuMobile = document.querySelector('.menu-mobile')
+
+btnMenu.addEventListener('click', ()=> {
+    menuMobile.classList.toggle('aberto')
+
+    if(menuMobile.classList.contains('aberto')){
+        btnMenu.textContent = '✕'
+    }else{
+        btnMenu.textContent = '☰'
+    }
+})
+
 
 if(btnLogout){
     btnLogout.addEventListener('click', async () => {

@@ -84,3 +84,22 @@ body{
     color: #d66;
     font-size: 14px;
 }
+
+@media (max-width: 1024px) {
+
+    body{
+        flex-direction: column;
+    }
+
+    .painel{
+        order: 2;
+    }
+
+    .logo-fundo {
+        order: 1;
+        position: static;
+        width: 200px;
+        opacity: 0.5;
+        margin-bottom: 40px;
+    }
+}

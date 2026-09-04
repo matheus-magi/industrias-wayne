@@ -13,20 +13,34 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    
     <aside class="sidebar">
-        <h1>Indústrias Wayne</h1>
+        <div class="topo-sidebar">
+            <h1>Indústrias Wayne</h1>
 
-        <nav>
-            <a href="/dashboard.html" class="active">Dashboard</a>
-            <a href="/inventario.html">Inventário</a>
-        </nav>
-
-        <div id="user-info">
-            <p id="nome-usuario"></p>
-            <p id="cargo-usuario"></p>
+            <button id="btn-menu">☰</button>
         </div>
 
-        <button id="btn-logout">Sair</button>
+        <img src="/img/batman_logo.png" class="logo-sidebar" alt="logo do batman">
+
+        <div class="menu-mobile">
+
+            <nav>
+                <a href="/dashboard.html"  class="active">Dashboard</a>
+                <a href="/inventario.html">Inventário</a>
+            </nav>
+
+            <div id="user-info">
+                <p id="nome-usuario"></p>
+                <p id="cargo-usuario"></p>
+            </div>
+
+            <button id="btn-logout">Sair</button>
+
+        </div>
+
+        
     </aside>
 
     <main class="dashboard">
@@ -52,6 +66,11 @@
             <div class="card">
                 <span>Em manutenção</span>
                 <strong id="recursos-manutencao">0</strong>
+            </div>
+
+            <div class="card">
+                <span>Esgotados</span>
+                <strong id="recursos-esgotados">0</strong>
             </div>
 
         </section>
@@ -111,7 +130,7 @@
                         </div>
 
                         <div class="barra">
-                            <div class="barra-preenchida" id="barra-disponivel"></div>
+                            <div class="barra-preenchida barra-disponivel" id="barra-disponivel"></div>
                         </div>
                     </div>
 
@@ -123,7 +142,19 @@
                         </div>
 
                         <div class="barra">
-                            <div class="barra-preenchida" id="barra-manutencao"></div>
+                            <div class="barra-preenchida barra-manutencao" id="barra-manutencao"></div>
+                        </div>
+                    </div>
+
+                    <div class="categoria">
+
+                        <div class="categoria-info">
+                            <span>Esgotados</span>
+                            <strong id="info-esgotado">0</strong>
+                        </div>
+
+                        <div class="barra">
+                            <div class="barra-preenchida barra-esgotado" id="barra-esgotado"></div>
                         </div>
                     </div>
                 </div>

@@ -15,19 +15,31 @@
 <body>
 
     <aside class="sidebar">
-        <h1>Indústrias Wayne</h1>
+        <div class="topo-sidebar">
+            <h1>Indústrias Wayne</h1>
 
-        <nav>
-            <a href="/dashboard.html">Dashboard</a>
-            <a href="/inventario.html" class="active">Inventário</a>
-        </nav>
-
-        <div id="user-info">
-            <p id="nome-usuario"></p>
-            <p id="cargo-usuario"></p>
+            <button id="btn-menu">☰</button>
         </div>
 
-        <button id="btn-logout">Sair</button>
+        <img src="/img/batman_logo.png" class="logo-sidebar" alt="logo do batman">
+
+        <div class="menu-mobile">
+
+            <nav>
+                <a href="/dashboard.html">Dashboard</a>
+                <a href="/inventario.html" class="active">Inventário</a>
+            </nav>
+
+            <div id="user-info">
+                <p id="nome-usuario"></p>
+                <p id="cargo-usuario"></p>
+            </div>
+
+            <button id="btn-logout">Sair</button>
+
+        </div>
+        
+        
     </aside>
 
     <main class="inventario">
@@ -64,20 +76,30 @@
 
             <section class="painel">
                 <h3>Controle de Inventário</h3>
-                <table id="tabelaItens">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Categoria</th>
-                            <th>Quantidade</th>
-                            <th>Status</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
 
-                    <tbody id="tbody">
-                    </tbody>
-                </table>
+                <p class="aviso-tabela">Deslize para o lado para ver mais →</p>
+
+                <div class="tabela-container">
+
+                    <table id="tabelaItens">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>
+                                    <span class="titulo-completo">Quantidade</span>
+                                    <span class="titulo-curto">Qtd.</span>
+                                </th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tbody"></tbody>
+                    </table>
+
+                </div>
+                
         </section>
     </main>
 

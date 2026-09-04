@@ -31,6 +31,9 @@ async function carregarDashboard(){
     const recursosManutencao = inventario.filter((item) => item.status === 'Em manutenção')
     document.getElementById('recursos-manutencao').textContent = recursosManutencao.length
 
+    const recursosEsgotados = inventario.filter((item) => item.status === "Esgotado")
+    document.getElementById('recursos-esgotados').textContent = recursosEsgotados.length
+
     const equipamentos = inventario.filter((item) => item.categoria === 'Equipamento')
     const dispositivosSeguranca = inventario.filter((item) => item.categoria === 'Dispositivo de segurança')
     const veiculos = inventario.filter((item) => item.categoria === 'Veículo')
@@ -40,6 +43,7 @@ async function carregarDashboard(){
     const veiculosBarraWidth = ((veiculos.length)/totalRecursos) * 100
     const disponivelBarraWidth = ((recursosDisponiveis.length)/totalRecursos) * 100
     const manutencaoBarraWidth = ((recursosManutencao.length)/totalRecursos) * 100
+    const esgotadoBarraWidth = ((recursosEsgotados.length)/totalRecursos) * 100
 
 
     document.getElementById('info-equipamento').textContent = equipamentos.length
@@ -52,9 +56,12 @@ async function carregarDashboard(){
 
     document.getElementById('info-disponivel').textContent = recursosDisponiveis.length
     document.getElementById('info-manutencao').textContent = recursosManutencao.length
+    document.getElementById('info-esgotado').textContent = recursosEsgotados.length
 
     document.getElementById('barra-disponivel').style.width = `${disponivelBarraWidth}%`
     document.getElementById('barra-manutencao').style.width = `${manutencaoBarraWidth}%`
+    document.getElementById('barra-esgotado').style.width = `${esgotadoBarraWidth}%`
+
 
 }
 
